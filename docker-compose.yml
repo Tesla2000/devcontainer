@@ -9,6 +9,10 @@ services:
       - ..:/workspace:cached
       - claude-config:/home/dev/.claude
       - ${SSH_AUTH_SOCK}:/ssh-agent
+      - ../pyproject.toml:/workspace/pyproject.toml:ro
+      - ../.pre-commit-config.yaml:/workspace/.pre-commit-config.yaml:ro
+      - ../.claude/settings.json:/workspace/.claude/settings.json:ro
+      - ../.claude/settings.local.json:/workspace/.claude/settings.local.json:ro
     environment:
       - SSH_AUTH_SOCK=/ssh-agent
     command: sleep infinity
