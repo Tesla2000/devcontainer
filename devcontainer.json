@@ -22,7 +22,11 @@
       "source": "/run/user/1000/pulse/native",
       "target": "/run/user/1000/pulse/native",
       "type": "bind"
-    }
+    },
+    "source=${localWorkspaceFolder}/pyproject.toml,target=/workspace/pyproject.toml,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.pre-commit-config.yaml,target=/workspace/.pre-commit-config.yaml,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.claude/settings.json,target=/workspace/.claude/settings.json,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.claude/settings.local.json,target=/workspace/.claude/settings.local.json,type=bind,readonly"
   ],
   "postStartCommand": "chown -R dev:dev /home/dev/.claude",
   "postCreateCommand": "bash .devcontainer/post-create.sh",
