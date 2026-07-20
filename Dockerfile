@@ -11,8 +11,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         npm \
         openssh-client \
         locales-all \
+        gnupg \
+        unzip \
         pulseaudio-utils \
     && rm -rf /var/lib/apt/lists/*
+
+# Terraform
+RUN ["/bin/bash", "-c", "set -euo pipefail && \
+    curl -fsSL https://apt.releases.hashicorp.com/gpg \
+      | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg && \
+    echo \"deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main\" \
+      > /etc/apt/sources.list.d/hashicorp.list && \
+    apt-get update && apt-get install -y --no-install-recommends terraform && \
+    rm -rf /var/lib/apt/lists/*"]
+
+# AWS CLI v2
+RUN curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscliv2.zip \
+    && unzip -q /tmp/awscliv2.zip -d /tmp \
+    && /tmp/aws/install \
+    && rm -rf /tmp/awscliv2.zip /tmp/aws
 
 RUN ["/bin/bash", "-c", "set -euo pipefail && \
     curl -fsSL https://github.com/junegunn/fzf/releases/download/v0.62.0/fzf-0.62.0-linux_amd64.tar.gz \

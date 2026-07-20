@@ -1,4 +1,5 @@
 {
+  "name": "dnd-character-creator",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
