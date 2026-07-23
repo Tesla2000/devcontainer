@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         ca-certificates \
         build-essential \
+        rustc \
+        cargo \
         bubblewrap \
         socat \
         nodejs \
