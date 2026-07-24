@@ -57,6 +57,12 @@ RUN chown dev:dev /workspace
 
 USER dev
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
+        -y --default-toolchain stable --profile minimal \
+    && /home/dev/.cargo/bin/rustup target add wasm32-unknown-unknown
+
+ENV PATH="/home/dev/.cargo/bin:${PATH}"
+
 RUN mkdir -p /home/dev/.claude
 RUN mkdir -p /home/dev/.config/rtk && \
     chown -R dev:dev /home/dev/.config
