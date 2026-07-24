@@ -5,8 +5,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         ca-certificates \
         build-essential \
-        rustc \
-        cargo \
         bubblewrap \
         socat \
         nodejs \
@@ -15,6 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         locales-all \
         pulseaudio-utils \
     && rm -rf /var/lib/apt/lists/*
+
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:${PATH}
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \
+      | sh -s -- -y --default-toolchain stable --profile minimal \
+    && chmod -R a+w "${RUSTUP_HOME}" "${CARGO_HOME}"
 
 RUN ["/bin/bash", "-c", "set -euo pipefail && \
     curl -fsSL https://github.com/junegunn/fzf/releases/download/v0.62.0/fzf-0.62.0-linux_amd64.tar.gz \
