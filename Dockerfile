@@ -24,6 +24,9 @@ ENV LC_ALL=en_US.UTF-8
 
 RUN npm install -g @anthropic-ai/claude-code
 
+RUN curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh \
+    | RTK_INSTALL_DIR=/usr/local/bin sh
+
 RUN groupadd --gid 1000 dev && useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home dev
 
 ENV UV_LINK_MODE=copy
