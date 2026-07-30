@@ -41,7 +41,10 @@ RUN chown dev:dev /workspace
 USER dev
 
 RUN mkdir -p /home/dev/.claude
+RUN mkdir -p /home/dev/.config/rtk && \
+    chown -R dev:dev /home/dev/.config
 
+COPY --chown=dev:dev .devcontainer/config/rtk.toml /home/dev/.config/rtk/config.toml
 COPY --chown=dev:dev pyproject.toml uv.lock .pre-commit-config.yaml README.md ./
 RUN uv sync --group dev --no-install-project
 RUN git config --global user.email "build@example.com" && \
