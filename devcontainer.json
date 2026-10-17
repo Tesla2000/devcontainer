@@ -39,7 +39,10 @@
     },
     "jetbrains": {
       "backend": "PyCharm",
-      "plugins": ["31507", "16313"]
+      "plugins": [
+        "31507",
+        "16313"
+      ]
     }
   },
   "containerEnv": {
@@ -47,5 +50,12 @@
     "SSH_AUTH_SOCK": "/ssh-agent",
     "PULSE_SERVER": "unix:/run/user/1000/pulse/native",
     "CLAUDE_CONFIG_DIR": "/workspace/.claude"
-  }
+  },
+  "runArgs": [
+      "--security-opt",
+      "seccomp=unconfined",
+      "--security-opt",
+      "apparmor=unconfined",
+      "--cap-add=SYS_ADMIN"
+  ]
 }
