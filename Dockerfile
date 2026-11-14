@@ -44,6 +44,9 @@ RUN npm install -g @anthropic-ai/claude-code
 RUN curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh \
     | RTK_INSTALL_DIR=/usr/local/bin sh
 
+RUN curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh \
+    | CODEGRAPH_INSTALL_DIR=/opt/codegraph CODEGRAPH_BIN_DIR=/usr/local/bin sh
+
 RUN groupadd --gid 1000 dev && useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home dev
 
 ENV UV_LINK_MODE=copy
