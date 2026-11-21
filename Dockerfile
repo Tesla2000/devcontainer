@@ -30,7 +30,8 @@ RUN curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh \
 RUN groupadd --gid 1000 dev && useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home dev
 
 ENV UV_LINK_MODE=copy
-ENV PATH="/workspace/.venv/bin:${PATH}"
+ENV UV_PROJECT_ENVIRONMENT=/home/dev/.venvs/dnd-character-creator
+ENV PATH="/home/dev/.venvs/dnd-character-creator/bin:${PATH}"
 ENV PRE_COMMIT_HOME="/.jbdevcontainer/pre-commit"
 
 RUN mkdir -p /.jbdevcontainer/pre-commit && chown -R dev:dev /.jbdevcontainer
